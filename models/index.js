@@ -3,7 +3,21 @@ const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
-const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD, { host: process.env.HOST, dialect: process.env.DIALECT });
+const sequelize = new Sequelize(process.env.DATABASE_NAME,
+process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD,
+{ host: process.env.HOST,
+    port: process.env.DB_PORT,
+    dialect: process.env.DIALECT,
+    dialectOptions:
+    {
+        // Need to use Secure Sockets Layer. A required encryption between my app and the cloud-database
+        ssl:
+        {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
+ });
 const db = {};
 db.sequelize = sequelize;
 fs.readdirSync(__dirname)
