@@ -38,8 +38,19 @@ module.exports = (sequelize, Sequelize) =>
     // The Participant-table therefore needs to be populated first, otherwise the FK of the latter refers to a non-existent PK
     Participant.associate = function(models)
     {
-        Participant.hasOne(models.Work);
-        Participant.hasOne(models.Home);
+        Participant.hasOne(models.Work,
+        {
+            foreignKey: "ParticipantEmail",
+            // Automatically delete Work-data when the related Participant is deleted
+            onDelete: 'CASCADE'
+        });
+
+        Participant.hasOne(models.Home,
+        {
+            foreignKey: "ParticipantEmail",
+            // Automatically delete Home-data when the related Participant is deleted
+            onDelete: 'CASCADE'
+        });
     };
 
     return Participant;

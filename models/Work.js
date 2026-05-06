@@ -33,11 +33,7 @@ module.exports = (sequelize, Sequelize) =>
     {
         Work.belongsTo(models.Participant,
         {
-            foreignKey:
-            {
-                name: "ParticipantEmail",
-                allowNull: false,
-            },
+            foreignKey: "ParticipantEmail",
             // Automatically delete Work-data when the related Participant is deleted
             onDelete: 'CASCADE'
         });

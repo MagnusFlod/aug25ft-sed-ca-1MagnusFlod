@@ -26,12 +26,7 @@ module.exports = (sequelize, Sequelize) =>
     {
         Home.belongsTo(models.Participant,
         {
-            // FK that refers to the PK of the Participants-table
-            foreignKey:
-            {
-                name: "ParticipantEmail",
-                allowNull: false,
-            },
+            foreignKey: "ParticipantEmail",
             // Automatically delete Home-data when the related Participant is deleted
             onDelete: 'CASCADE'
         });

@@ -86,5 +86,10 @@ class ParticipantService
             where: { email: email }
         });
     }
+
+    async updateParticipant(data, options)
+    {
+        return this.participant.update(data, options);
+    }
 }
 module.exports = ParticipantService;
