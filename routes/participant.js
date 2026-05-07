@@ -17,7 +17,7 @@ router.post('/add', isAuth, async function(req, res)
     const { country, city } = home;
 
     // Creating/posting the data into the participant-table. This table is populated first, because it hold's the PK
-    const participantPerson = await participantService.create
+    const participantPerson = await participantService.createParticipant
     ({
         email: email,
         firstName: firstName,
@@ -53,7 +53,7 @@ router.post('/add', isAuth, async function(req, res)
 router.get('/', isAuth, async function(req, res)
 {
     // Get's a list of all participants from the database
-    const participants = await participantService.getAll();
+    const participants = await participantService.getAllParticipants();
 
     // The response comes in json-format
     res.json(participants);

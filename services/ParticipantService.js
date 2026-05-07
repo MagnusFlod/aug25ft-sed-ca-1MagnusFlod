@@ -9,7 +9,7 @@ class ParticipantService
         this.Home = db.Home;
 	}
 
-	async create({ email, firstName, lastName, dob })
+	async createParticipant({ email, firstName, lastName, dob })
 	{
 		return this.participant.create
 		({
@@ -20,7 +20,7 @@ class ParticipantService
 		});
 	}
 
-    async getAll()
+    async getAllParticipants()
     {
         return this.participant.findAll();
     }
