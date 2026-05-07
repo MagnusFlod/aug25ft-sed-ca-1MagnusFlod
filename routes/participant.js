@@ -46,9 +46,10 @@ router.post('/add', isAuth, async function(req, res)
         city: city
     });
 
-    // The responce comes in json-format
+    // All responses comes in json-format. 'res.json' will be repeated in all endpoints
     res.json({ participant: participantPerson, work: workData, home: homeData });
 });
+
 
 // CRUD READ. Endpoint for http://localhost:3000/participant during development-face
 router.get('/', isAuth, async function(req, res)
@@ -60,6 +61,7 @@ router.get('/', isAuth, async function(req, res)
     res.json(participants);
 });
 
+
 // CRUD READ. Endpoint for http://localhost:3000/participant/details during development-face
 router.get('/details', isAuth, async function(req, res)
 {
@@ -68,6 +70,7 @@ router.get('/details', isAuth, async function(req, res)
 
     res.json(participants);
 });
+
 
 // READ. Endpoint for http://localhost:3000/participant/details/examplemail@example.com during development-face
 router.get('/details/:email', isAuth, async function(req, res)
@@ -81,44 +84,60 @@ router.get('/details/:email', isAuth, async function(req, res)
     res.json(participant);
 });
 
+
+// READ. Endpoint for http://localhost:3000/participant/work/examplemail@example.com during dev-face
 router.get('/work/:email', isAuth, async function(req, res)
 {
+    // Accessing email
     const email = req.params.email;
 
+    // Get's companyName, salary and currency for the specific participant
     const work = await participantService.getWorkDetails(email);
 
     res.json(work);
 });
 
+
+// Delete-endpoint for http://localhost:3000/participant/home/examplemail@example.com during dev-face
 router.get('/home/:email', isAuth, async function(req, res)
 {
     const email = req.params.email;
 
+    // Get's country and city for the specific participant
     const home = await participantService.getHomeDetails(email);
 
     res.json(home);
 });
 
+
+// Endpoint for http://localhost:3000/participant/examplemail@example.com during dev-face
 router.delete('/:email', isAuth, async function(req, res)
 {
+    // The Participant is deleted by the selected PK which is the participants email
     const email = req.params.email;
 
+    // Deletes all data for that specific participant. That includes Participant-data, Work-data and Home-data
+    // I selected 'onDelete: 'CASCADE' in models/Work.js and Home.js to ensure related data are also deleted when a participant is deleted
     const deleted = await participantService.deleteParticipant(email);
 
     res.json({ "message": 'Participant is deleted'});
 });
 
 
+// Final endpoint. UPDATE for http://localhost:3000/participant/examplemail@example.com during dev-face
 router.put('/:email', isAuth, async function(req, res)
 {
 
+    // Aqcuiring all tables from the body
     const { participant, work, home } = req.body;
 
+    // Aqcuiring all columns in all 3 tables
     // Not updating email. Because email is the PK! A unique value that gives integrity for the data
     const { firstName, lastName, dob } = participant;
     const { companyName, salary, currency } = work;
     const { country, city } = home;
 
+    // Updating fields in participant-table, either firstName, lastName or dob for the specific participant
     const updatedParticipant = await participantService.updateParticipant
     (
         {
@@ -128,11 +147,12 @@ router.put('/:email', isAuth, async function(req, res)
             dob
         },
         {
+            // Ref, the specific participant
             where: { email: req.params.email }
         }
     );
 
-
+    // Updating fields in Work-table, either companyName, salary or currency for the specific participant
     const updatedWorkData = await db.Work.update
     (
         {
@@ -141,10 +161,12 @@ router.put('/:email', isAuth, async function(req, res)
             currency
         },
         {
+            // Ref, the FK to the specific participant
             where: { ParticipantEmail: req.params.email }
         }
     );
 
+    // Updating fields in Home-table, either country or city for the specific participant
     const updatedHomeData = await db.Home.update
     (
         {
@@ -152,6 +174,7 @@ router.put('/:email', isAuth, async function(req, res)
             city
         },
         {
+            // Ref, the FK
             where: { ParticipantEmail: req.params.email }
         }
     );
