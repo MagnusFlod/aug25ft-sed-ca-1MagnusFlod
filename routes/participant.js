@@ -3,6 +3,7 @@ var router = express.Router();
 const db = require('../models');
 const isAuth = require('../middleware/middleware');
 const ParticipantService = require('../services/ParticipantService');
+const { where } = require('sequelize');
 const participantService = new ParticipantService(db);
 
 // CRUD-CREATE. Posting the data of a participant that includes data in participant-table, work-table and home-table
@@ -105,6 +106,57 @@ router.delete('/:email', isAuth, async function(req, res)
     const deleted = await participantService.deleteParticipant(email);
 
     res.json({ "message": 'Participant is deleted'});
+});
+
+
+router.put('/:email', isAuth, async function(req, res)
+{
+
+    const { participant, work, home } = req.body;
+
+    // Not updating email. Because email is the PK! A unique value that gives integrity for the data
+    const { firstName, lastName, dob } = participant;
+    const { companyName, salary, currency } = work;
+    const { country, city } = home;
+
+    const updatedParticipant = await participantService.updateParticipant
+    (
+        {
+        // Updating email could also cause trouble for the related Work and Home-data since they rely on FK which is the email(PK)
+            firstName,
+            lastName,
+            dob
+        },
+        {
+            where: { email: req.params.email }
+        }
+    );
+
+
+    const updatedWorkData = await db.Work.update
+    (
+        {
+            companyName,
+            salary,
+            currency
+        },
+        {
+            where: { ParticipantEmail: req.params.email }
+        }
+    );
+
+    const updatedHomeData = await db.Home.update
+    (
+        {
+            country,
+            city
+        },
+        {
+            where: { ParticipantEmail: req.params.email }
+        }
+    );
+
+    res.json({ participant: updatedParticipant, work: updatedWorkData, home: updatedHomeData });
 });
 
 module.exports = router;
