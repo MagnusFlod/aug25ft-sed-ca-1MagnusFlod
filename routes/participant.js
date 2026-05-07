@@ -120,7 +120,7 @@ router.delete('/:email', isAuth, async function(req, res)
     // I selected 'onDelete: 'CASCADE' in models/Work.js and Home.js to ensure related data are also deleted when a participant is deleted
     const deleted = await participantService.deleteParticipant(email);
 
-    res.json({ "message": 'Participant is deleted'});
+    res.json({ "message": 'Participant is deleted' });
 });
 
 
