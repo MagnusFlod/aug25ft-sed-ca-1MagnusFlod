@@ -51,7 +51,7 @@ router.post('/add', isAuth, async function(req, res)
 });
 
 
-// CRUD READ. Endpoint for http://localhost:3000/participant during development-face
+// CRUD READ. Endpoint for http://localhost:3000/participant in Postman during development-face
 router.get('/', isAuth, async function(req, res)
 {
     // Get's a list of all participants from the database
