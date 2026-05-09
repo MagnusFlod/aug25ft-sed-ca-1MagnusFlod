@@ -1,6 +1,6 @@
 ## Overview
 This is an application that registers participants in a census-application.
-It works by publishing, viewing changing and removing relevant data regarding participants.
+It works by publishing, viewing, changing and removing relevant data regarding participants.
 It's runs only in backend. All requests must be sendt via Postman or other similar tools.
 The app is Deployed on Render. The server is located in Frankfurt. Central EU.
 When the app is live, every request is sendt back and forth between the user and Frankfurt.
