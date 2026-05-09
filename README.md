@@ -86,6 +86,7 @@ GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/work/examplemai
 GET http://localhost:3000/participant/home/examplemail@example.com
 GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/home/examplemail@example.com
 
+
 # Deleting / Updating the participant
 DELETE http://localhost:3000/participant/examplemail@example.com
 DELETE https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/examplemail@example.com
