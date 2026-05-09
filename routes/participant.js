@@ -70,7 +70,7 @@ router.post('/add', isAuth, async function(req, res)
 });
 
 
-// CRUD READ. Endpoint for http://localhost:3000/participant in Postman during development-face
+// CRUD READ. Endpoint for http://localhost:3000/participant in Postman during development-phase
 router.get('/', isAuth, async function(req, res)
 {
     // Get's a list of all participants from the database
@@ -81,7 +81,7 @@ router.get('/', isAuth, async function(req, res)
 });
 
 
-// CRUD READ. Endpoint for http://localhost:3000/participant/details during development-face
+// CRUD READ. Endpoint for http://localhost:3000/participant/details during development-phase
 router.get('/details', isAuth, async function(req, res)
 {
     // Get's details of all participants including firtstName, lastName and email
@@ -91,7 +91,7 @@ router.get('/details', isAuth, async function(req, res)
 });
 
 
-// READ. Endpoint for http://localhost:3000/participant/details/examplemail@example.com during development-face
+// READ. Endpoint for http://localhost:3000/participant/details/examplemail@example.com during development-phase
 router.get('/details/:email', isAuth, async function(req, res)
 {
     // Accessing the email-parameter for the specific participant
@@ -104,7 +104,7 @@ router.get('/details/:email', isAuth, async function(req, res)
 });
 
 
-// READ. Endpoint for http://localhost:3000/participant/work/examplemail@example.com during dev-face
+// READ. Endpoint for http://localhost:3000/participant/work/examplemail@example.com during dev-phase
 router.get('/work/:email', isAuth, async function(req, res)
 {
     // Accessing email
@@ -117,7 +117,7 @@ router.get('/work/:email', isAuth, async function(req, res)
 });
 
 
-// Delete-endpoint for http://localhost:3000/participant/home/examplemail@example.com during dev-face
+// Delete-endpoint for http://localhost:3000/participant/home/examplemail@example.com during dev-phase
 router.get('/home/:email', isAuth, async function(req, res)
 {
     const email = req.params.email;
@@ -129,7 +129,7 @@ router.get('/home/:email', isAuth, async function(req, res)
 });
 
 
-// Endpoint for http://localhost:3000/participant/examplemail@example.com during dev-face
+// Endpoint for http://localhost:3000/participant/examplemail@example.com during dev-phase
 router.delete('/:email', isAuth, async function(req, res)
 {
     // The Participant is deleted by the selected PK which is the participants email
@@ -143,7 +143,7 @@ router.delete('/:email', isAuth, async function(req, res)
 });
 
 
-// Final endpoint. UPDATE for http://localhost:3000/participant/examplemail@example.com during dev-face
+// Final endpoint. UPDATE for http://localhost:3000/participant/examplemail@example.com during dev-phase
 router.put('/:email', isAuth, async function(req, res)
 {
 

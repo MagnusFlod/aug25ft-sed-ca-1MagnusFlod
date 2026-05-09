@@ -1,13 +1,16 @@
 ## Overview
 This is an application that registers participants in a census-application.
 It works by publishing, viewing changing and removing relevant data regarding participants.
-It's runs ONLY in backend. All requests must be sendt via Postman or other similar tools.
+It's runs only in backend. All requests must be sendt via Postman or other similar tools.
+The app is Deployed on Render. The server is located in Frankfurt. Central EU.
+When the app is live, every request is sendt back and forth between the user and Frankfurt.
+
 
 # Application Installation and Usage Instructions
 Clone the repository:
 
-git clone aug25ft-api-ca-1-MagnusFlod-1
-cd aug25ft-api-ca-1-MagnusFlod-1
+git clone https://github.com/MagnusFlod/aug25ft_srv_ca_1_MagnusFlod
+cd aug25ft_srv_ca_1_MagnusFlod
 
 Install dependencies:
 
@@ -25,7 +28,7 @@ npm install -g express-generator
 
 npm install
 
-npm install seqielize
+npm install sequelize
 
 npm install dotenv
 
@@ -57,26 +60,39 @@ This has to be done on every API-endpoint. Notice the 'isAuth-call' on the start
 The username and password are coded in the middleware/middleware.js-file.
 
 
-## API Endpoints
-
+## API Endpoints for both development-phase and after deployment
 
 # Participant list
 POST http://localhost:3000/participant/add
+POST https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/add
+
 GET http://localhost:3000/participant
+GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant
+
 
 # Participant details
 GET http://localhost:3000/participant/details
+GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/details
+
 
 GET http://localhost:3000/participant/details/examplemail@example.com
+GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/details/examplemail@example.com
+
 
 GET http://localhost:3000/participant/work/examplemail@example.com
+GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/work/examplemail@example.com
+
 
 GET http://localhost:3000/participant/home/examplemail@example.com
+GET https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/home/examplemail@example.com
 
 # Deleting / Updating the participant
 DELETE http://localhost:3000/participant/examplemail@example.com
+DELETE https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/examplemail@example.com
+
 
 PUT http://localhost:3000/participant/examplemail@example.com
+PUT https://aug25ft-srv-ca-1-magnusflod.onrender.com/participant/examplemail@example.com
 
 
 
