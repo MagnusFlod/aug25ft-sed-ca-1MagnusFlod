@@ -14,15 +14,11 @@ db.sequelize.sync({ force: false })
 .then(() => console.log('Database is connected.'))
 .catch(err => console.log('DB error', err));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/participant', participantRouter);
@@ -40,9 +36,11 @@ app.use(function(err, req, res, next)
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // render the error in json-format
+  res.status(err.status || 500).json
+  ({
+    message: err.message
+  });
 });
 
 module.exports = app;
