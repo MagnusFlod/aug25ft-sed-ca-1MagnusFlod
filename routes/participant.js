@@ -17,6 +17,24 @@ router.post('/add', isAuth, async function(req, res)
     const { companyName, salary, currency } = work;
     const { country, city } = home;
 
+    // Checking if dob is a valid date by parsing it to a Date format
+    if(isNaN(Date.parse(dob)))
+    {
+        return res.status(400).json({ message: "dob must be a valid date-format! YYYY-MM-DD" });
+    }
+
+    // If any field is missing in the postman-request, an error-message occours
+    if(!email || !firstName || !lastName || !dob || !companyName || !salary || !currency || !country || !city)
+    {
+        return res.status(400).json({ message: "Missing field" });
+    }
+
+    // Email must include '@'
+    if(!email.includes('@'))
+    {
+        return res.status(400).json({ message: "Email must be in the correct format" });
+    }
+
     // Creating/posting the data into the participant-table. This table is populated first, because it hold's the PK
     const participantPerson = await participantService.createParticipant
     ({
@@ -25,6 +43,7 @@ router.post('/add', isAuth, async function(req, res)
         lastName: lastName,
         dob: dob
     });
+
 
     // Making a variable for the FK which is the PK of participant-table
     const foreignKey = participantPerson.email;

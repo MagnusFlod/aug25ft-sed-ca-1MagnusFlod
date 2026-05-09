@@ -1,8 +1,7 @@
 ## Overview
-This is an application that registers participants in a census-application. It works by publishing relevant data regarding participants.
+This is an application that registers participants in a census-application.
+It works by publishing, viewing changing and removing relevant data regarding participants.
 It's runs ONLY in backend. All requests must be sendt via Postman or other similar tools.
-All requests require Basic Auth in Postman. Correct username and password are necessary.
-
 
 # Application Installation and Usage Instructions
 Clone the repository:
@@ -47,15 +46,42 @@ PORT=3000
 
 
 ## Database Setup
-
+CREATE DATABASE censusAPI;
+USE censusAPI;
 
 
 ## Authentication
-
+Go to authorization-field in Postman. Select 'basic auth'.
+Write correct username and password.
+This has to be done on every API-endpoint. Notice the 'isAuth-call' on the start of every API request in routes/participants.js
+The username and password are coded in the middleware/middleware.js-file.
 
 
 ## API Endpoints
 
 
+# Participant list
+POST http://localhost:3000/participant/add
+GET http://localhost:3000/participant
+
+# Participant details
+GET http://localhost:3000/participant/details
+
+GET http://localhost:3000/participant/details/examplemail@example.com
+
+GET http://localhost:3000/participant/work/examplemail@example.com
+
+GET http://localhost:3000/participant/home/examplemail@example.com
+
+# Deleting / Updating the participant
+DELETE http://localhost:3000/participant/examplemail@example.com
+
+PUT http://localhost:3000/participant/examplemail@example.com
+
+
 
 ## Technologies Used
+Node.js
+Express.js
+MySQL
+Sequelize
