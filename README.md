@@ -12,7 +12,7 @@ Render URL:
 https://aug25ft-srv-ca-1-magnusflod.onrender.com
 
 Note:
-This is a pure backend project, so navigating to this URL will not provide andy frontend-view.
+This is a pure backend project, so navigating to this URL will not provide any frontend-view.
 Use the API-endpoints listed down below for testing.
 
 # Application Installation and Usage Instructions
