@@ -6,6 +6,15 @@ The app is Deployed on Render. The server is located in Frankfurt. Central EU.
 When the app is live, every request is sendt back and forth between the user and Frankfurt.
 
 
+## Live Deployment
+
+Render URL:
+https://aug25ft-srv-ca-1-magnusflod.onrender.com
+
+Note:
+This is a pure backend project, so navigating to this URL will not provide andy frontend-view.
+Use the API-endpoints listed down below for testing.
+
 # Application Installation and Usage Instructions
 Clone the repository:
 
